@@ -94,7 +94,6 @@ const userSlice = createSlice({
             state.error2 = null
             state.token = action.payload.token
             state.user = action.payload.user
-            console.log(action.payload.user);
         })
     }
 })

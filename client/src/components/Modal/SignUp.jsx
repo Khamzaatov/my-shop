@@ -30,7 +30,12 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authSignUp({ email, password }))
+    dispatch(authSignUp({ email, password })).then((data) => {
+      if (!data.error) {
+        setRegistr(false)
+        setModalActive(true)
+      }
+    })
   };
 
   const { modalActive, setModalActive, setRegistr } = useContext(Context);
@@ -49,7 +54,7 @@ const SignUp = () => {
         className={modalActive ? "modal__content active" : "modal__content"}
         onClick={(e) => e.stopPropagation()}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"
             value={email}
@@ -70,7 +75,7 @@ const SignUp = () => {
             )}
           </div>
           {error && <div className="err">{error}</div>}
-          <button>Зарегистрироваться</button>
+          <button type="submit">Зарегистрироваться</button>
           <p style={{fontSize : '14px', marginTop : '10px'}}>
             Уже есть аккаунт? <Link onClick={handleClick}>Войдите</Link>
           </p>

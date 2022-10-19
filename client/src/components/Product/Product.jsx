@@ -11,10 +11,11 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const products = useSelector((state) => !min && !max ? state.product.products.map(item => item) : state.product.products.filter((el) => el.price >= min && el.price <= max));
+  const basket = useSelector(state => state.cart.cart.products)
 
   useEffect(() => {
     dispatch(fetchProducts('Все'));
-  });
+  }, [dispatch]);
 
   const filteredSneakears = products.filter((el) => {
      return el.name.toLowerCase().includes(search.toLowerCase())
@@ -22,8 +23,8 @@ const Product = () => {
 
   return (
     <div className={product.container}>
-      <div className={product.product}>
-        {filteredSneakears?.map((product) => {
+      <div className={product.product} id='product'>
+        {filteredSneakears.map((product) => {
           return (
             <Products
               id={product._id}
@@ -32,6 +33,7 @@ const Product = () => {
               left={product.left}
               category={product.category}
               img={product.img}
+              basket={basket}
             />
           );
         })}

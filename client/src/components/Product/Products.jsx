@@ -9,12 +9,11 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 import { fetchFavorite, deleteProductFavorite } from './../../features/favoriteSlice';
 
 
-const Products = ({ name, price, img, left, id }) => {
+const Products = ({ name, price, img, left, id, basket }) => {
   const dispatch = useDispatch()
   const { setModalActive } = useContext(Context);
 
   const token = useSelector((state) => state.user.token);
-  const basket = useSelector(state => state.cart.cart.products)
   const favorite = useSelector(state => state.favorite.favorite.products) 
   
   useEffect(() => {
@@ -27,14 +26,14 @@ const Products = ({ name, price, img, left, id }) => {
   
   const cart = basket?.find((item) => {
     if (item.productId._id === id) {
-      return true
+      return item
     }
     return false
   })
 
   const favor = favorite?.find((item) => {
     if (item._id === id) {
-      return true
+      return item
     }
     return false
   })

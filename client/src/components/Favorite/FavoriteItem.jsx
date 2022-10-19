@@ -12,10 +12,12 @@ const FavoriteItem = ({ name, id, price, left, img }) => {
 
   const cart = basket?.find((item) => {
     if (item.productId._id === id) {
-      return true;
+      return item;
     }
     return false;
   });
+
+  console.log(cart)
 
   const removeItem = (id) => {
     dispatch(deleteProductFavorite(id));

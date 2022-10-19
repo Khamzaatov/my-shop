@@ -1,5 +1,5 @@
 import header from "./header.module.sass";
-import { BsFillBagFill } from 'react-icons/bs'
+import { BsFillBagFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { SiNike } from "react-icons/si";
 import { ImExit } from "react-icons/im";
@@ -8,14 +8,14 @@ import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsHeartFill } from "react-icons/bs";
 import { signOut } from "../../features/userSlice";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
 
 const Header = () => {
-
   const dispatch = useDispatch();
   const { setModalActive } = useContext(Context);
   const token = useSelector((state) => state.user.token);
-  const amount = useSelector(state => state.cart.cart.products?.length)
+  const amount = useSelector((state) => state.cart.cart.products?.length);
 
   const exit = () => {
     dispatch(signOut());
@@ -29,26 +29,42 @@ const Header = () => {
       <div className={header.link}>
         <ul className={header.ul}>
           <li>
-            <Link to="/">Главная</Link>
+            <Link
+              to="carusel"
+              spy={true}
+              smooth={true}
+              offset={-80}
+              duration={500}
+            >
+              <NavLink to="/">Главная</NavLink>
+            </Link>
           </li>
           <li>
-            <Link to="#">Новинки</Link>
+              <NavLink to="/news">Новинки</NavLink>
           </li>
           <li>
-            <Link to="/about">О нас</Link>
+            <Link
+              to="about"
+              spy={true}
+              smooth={true}
+              offset={-80}
+              duration={500}
+            >
+              <NavLink to="/about">О нас</NavLink>
+            </Link>
           </li>
           <li>
-            <Link to="#">Контакты</Link>
+            <NavLink to="#">Контакты</NavLink>
           </li>
         </ul>
       </div>
       <div className={header.icon}>
         {token ? (
           <div className={header.heart}>
-              <Link to='/favorites'>
-                <BsHeartFill title="Избранные" />
-              </Link>
-            </div>
+            <NavLink to="/favorites">
+              <BsHeartFill title="Избранные" />
+            </NavLink>
+          </div>
         ) : (
           <div className={header.heart}>
             <BsHeartFill
@@ -59,13 +75,10 @@ const Header = () => {
         )}
         {token ? (
           <div className={header.cart}>
-             {amount > 0 && <div className={header.amount}>{amount}</div>} 
-            <Link to="/cart">
-              <BsFillBagFill
-                className={header.cart_icon}
-                title="Корзина"
-              />
-            </Link>
+            {amount > 0 && <div className={header.amount}>{amount}</div>}
+            <NavLink to="/cart">
+              <BsFillBagFill className={header.cart_icon} title="Корзина" />
+            </NavLink>
           </div>
         ) : (
           <div className={header.cart}>
@@ -84,8 +97,8 @@ const Header = () => {
               style={{ fontSize: "24px" }}
             />
           ) : (
-            <ImExit title="Выход" onClick={exit} className={header.exit} /> 
-            )}
+            <ImExit title="Выход" onClick={exit} className={header.exit} />
+          )}
         </div>
       </div>
     </div>

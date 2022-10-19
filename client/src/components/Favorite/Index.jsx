@@ -20,7 +20,7 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(fetchCart())
-  })
+  }, [dispatch])
 
   return (
     <div className={favorite.container}>

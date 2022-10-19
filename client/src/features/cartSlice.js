@@ -11,7 +11,7 @@ export const fetchCart = createAsyncThunk('cart/fetch', async (_, thunkAPI) => {
     }
 })
 
-export const addProduct = createAsyncThunk('cart/add', async (id, thunkAPI) => {
+export const addProduct = createAsyncThunk('cart/add', async (productId, thunkAPI) => {
     try {
         const userId = await thunkAPI.getState().user.user
         const res = await fetch(`http://localhost:4000/cart/add/${userId}`, {
@@ -19,7 +19,7 @@ export const addProduct = createAsyncThunk('cart/add', async (id, thunkAPI) => {
             headers : {
                 "Content-Type" : "application/json"
             },
-            body : JSON.stringify({ product : id })
+            body : JSON.stringify({ product : productId })
         })
         const data = await res.json()   
         return data 
@@ -94,7 +94,6 @@ const cartSlice = createSlice({
         builder
         .addCase(fetchCart.fulfilled, (state, action) => {
             state.cart = action.payload
-            console.log(action.payload);
         })
         .addCase(addProduct.fulfilled, (state, action) => {
             state.cart = action.payload

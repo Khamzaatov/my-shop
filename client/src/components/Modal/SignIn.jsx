@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordSwown, setPasswordShown] = useState(false);
+  const [passwordSwown, setPasswordShown] = useState(false);  
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,12 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authSignIn({ email, password }))
+    dispatch(authSignIn({ email, password })).then((data) => {
+      if (!data.error) {
+        setModalActive(false)
+      }
+    })
+    setModalActive(true)
   };
 
   const { modalActive, setModalActive, registr, setRegistr } =

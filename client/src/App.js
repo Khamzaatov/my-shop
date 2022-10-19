@@ -9,6 +9,7 @@ import About from './pages/About/About';
 import CartPage from './pages/Cart/CartPage';
 import SignIn from './components/Modal/SignIn';
 import Favorite from './pages/Favorite/Favorite';
+import News from './pages/News/News';
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Header />
             <Routes>
               <Route path='/' element={<Main />}></Route>
+              <Route path='/news' element={<News />}></Route>
               <Route path='/about' element={<About />}></Route>
               <Route path='/cart' element={<Navigate to='/' />}></Route>
               <Route path='/favorites' element={<Navigate to='/' />}></Route>
@@ -43,6 +45,7 @@ function App() {
         <Header />
           <Routes>
             <Route path='/' element={<Main />}></Route>
+            <Route path='/news' element={<News />}></Route>
             <Route path='/about' element={<About />}></Route>
             <Route path='/cart' element={<CartPage />}></Route>
             <Route path='/favorites' element={<Favorite />}></Route>

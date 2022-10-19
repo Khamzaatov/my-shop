@@ -9,7 +9,7 @@ import carousel from "./carousel.module.sass";
 const CarouselBox = () => {
   return (
     <>
-      <Carousel className={carousel.container}>
+      <Carousel className={carousel.container} id='carusel'>
         <Carousel.Item>
           <img
             style={{ height: "700px" }}
