@@ -40,7 +40,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-              <NavLink to="/news">Новинки</NavLink>
+            <NavLink to="/news">Новинки</NavLink>
           </li>
           <li>
             <Link
@@ -54,7 +54,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <NavLink to="#">Контакты</NavLink>
+            <NavLink to="/contacts">Контакты</NavLink>
           </li>
         </ul>
       </div>
@@ -75,7 +75,11 @@ const Header = () => {
         )}
         {token ? (
           <div className={header.cart}>
-            {amount > 0 && <div className={header.amount}>{amount}</div>}
+            {amount <= 9 && amount > 0 ? (
+              <div className={header.amount}>{amount}</div>
+            ) : amount > 9 ? (
+              <div className={header.amount}>9+</div>
+            ) : null}
             <NavLink to="/cart">
               <BsFillBagFill className={header.cart_icon} title="Корзина" />
             </NavLink>

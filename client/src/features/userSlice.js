@@ -49,7 +49,7 @@ export const authSignIn = createAsyncThunk('auth/signIn', async ({ email, passwo
     }
 })
 
-const userSlice = createSlice({
+const userSlice = createSlice({ 
     name : 'user',
     initialState : {
         error1 : null,

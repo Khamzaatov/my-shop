@@ -1,16 +1,23 @@
 import cart from "./cart.module.sass";
-import { MdClose } from "react-icons/md";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import {
   decProductCart,
   deleteProduct,
+  fetchCart,
   incProductCart,
 } from "./../../features/cartSlice";
+import { useEffect } from "react";
 
 const CartItem = ({ name, img, price, amount, id }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
 
   const removeItem = (id) => {
     dispatch(deleteProduct(id));
@@ -38,7 +45,9 @@ const CartItem = ({ name, img, price, amount, id }) => {
         </div>
         <div className={cart.total}>{amount * price}</div>
         <div className={cart.remove}>
-          <MdClose onClick={() => removeItem(id)} />
+          <IconButton className={cart.remove__icon} aria-label="delete">
+            <DeleteIcon onClick={() => removeItem(id)}/>
+          </IconButton>
         </div>
       </div>
     </>

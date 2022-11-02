@@ -8,4 +8,4 @@ router.patch('/favorite/delete/:userId', favoriteController.deleteProductFavorit
 
 
 
-module.exports = router
+module.exports = router 

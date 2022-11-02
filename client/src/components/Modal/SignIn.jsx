@@ -46,7 +46,7 @@ const SignIn = () => {
 
   const handleClick = () => {
     setRegistr(true);
-  };
+  };  
 
   const handleError = () => {
     if (!error) {
@@ -91,8 +91,7 @@ const SignIn = () => {
               {error && <div className='err'>Неверный логин или пароль!</div>}
               <button onClick={handleError}>Войти</button>
               <p style={{ fontSize: "14px", marginTop: "10px" }}>
-                Ещё нет аккаунта?{" "}
-                <Link onClick={handleClick}>Зарегистрируйтесь</Link>
+                Ещё нет аккаунта? <Link onClick={handleClick}>Зарегистрируйтесь</Link>
               </p>
             </form>
           </div>

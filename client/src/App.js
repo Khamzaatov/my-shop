@@ -10,6 +10,7 @@ import CartPage from './pages/Cart/CartPage';
 import SignIn from './components/Modal/SignIn';
 import Favorite from './pages/Favorite/Favorite';
 import News from './pages/News/News';
+import Contact from './pages/Contact/Contact';
 
 
 
@@ -34,6 +35,7 @@ function App() {
               <Route path='/about' element={<About />}></Route>
               <Route path='/cart' element={<Navigate to='/' />}></Route>
               <Route path='/favorites' element={<Navigate to='/' />}></Route>
+              <Route path='/contacts' element={<Contact />}></Route>
             </Routes>
             <SignIn />
         </Context.Provider>
@@ -49,6 +51,7 @@ function App() {
             <Route path='/about' element={<About />}></Route>
             <Route path='/cart' element={<CartPage />}></Route>
             <Route path='/favorites' element={<Favorite />}></Route>
+            <Route path='/contacts' element={<Contact />}></Route>
           </Routes>
           <SignIn />
       </Context.Provider>
