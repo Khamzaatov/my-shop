@@ -67,10 +67,9 @@ const Header = () => {
           </div>
         ) : (
           <div className={header.heart}>
-            <BsHeartFill
-              onClick={() => setModalActive(true)}
-              title="Избранные"
-            />
+            <NavLink to="/favorites">
+              <BsHeartFill title="Избранные" />
+            </NavLink>
           </div>
         )}
         {token ? (
@@ -86,11 +85,12 @@ const Header = () => {
           </div>
         ) : (
           <div className={header.cart}>
-            <BsFillBagFill
-              className={header.cart_icon}
-              onClick={() => setModalActive(true)}
-              title="Корзина"
-            />
+            <NavLink to="/cart">
+              <BsFillBagFill
+                className={header.cart_icon}
+                title="Корзина"
+              />
+            </NavLink>
           </div>
         )}
         <div className={header.user}>

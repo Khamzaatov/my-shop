@@ -5,15 +5,14 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import "./auth.sass";
 import { Link } from "react-router-dom";
 import { authSignIn } from "../../features/userSlice";
-import { useDispatch } from "react-redux";  
+import { useDispatch } from "react-redux";
 import SignUp from "./SignUp";
 import { useSelector } from "react-redux";
-
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordSwown, setPasswordShown] = useState(false);  
+  const [passwordSwown, setPasswordShown] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -35,10 +34,10 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(authSignIn({ email, password })).then((data) => {
       if (!data.error) {
-        setModalActive(false)
+        setModalActive(false);
       }
-    })
-    setModalActive(true)
+    });
+    setModalActive(true);
   };
 
   const { modalActive, setModalActive, registr, setRegistr } =
@@ -46,13 +45,13 @@ const SignIn = () => {
 
   const handleClick = () => {
     setRegistr(true);
-  };  
+  };
 
   const handleError = () => {
     if (!error) {
-        setModalActive(false)
-    } 
-  }
+      setModalActive(false);
+    }
+  };
 
   return (
     <>
@@ -65,6 +64,7 @@ const SignIn = () => {
             className={modalActive ? "modal__content active" : "modal__content"}
             onClick={(e) => e.stopPropagation()}
           >
+            <h1>Авторизация</h1>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -88,10 +88,11 @@ const SignIn = () => {
                   />
                 )}
               </div>
-              {error && <div className='err'>Неверный логин или пароль!</div>}
+              {error && <div className="err">Неверный логин или пароль!</div>}
               <button onClick={handleError}>Войти</button>
               <p style={{ fontSize: "14px", marginTop: "10px" }}>
-                Ещё нет аккаунта? <Link onClick={handleClick}>Зарегистрируйтесь</Link>
+                Ещё нет аккаунта?{" "}
+                <Link onClick={handleClick}>Зарегистрируйтесь</Link>
               </p>
             </form>
           </div>

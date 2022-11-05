@@ -1,9 +1,8 @@
-import Header from './components/Header/Header';
 import './style.sass'
 import { Context } from './context/context';
 import { useState } from 'react';
 import Main from './pages/Main/Main';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import About from './pages/About/About';
 import CartPage from './pages/Cart/CartPage';
@@ -11,7 +10,8 @@ import SignIn from './components/Modal/SignIn';
 import Favorite from './pages/Favorite/Favorite';
 import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
-
+import NotFound from './pages/NotFound/NotFound';
+import Loyout from './Loyout/Loyout';
 
 
 function App() {
@@ -28,14 +28,16 @@ function App() {
   if (!token) {
     return (
         <Context.Provider value={value}>
-          <Header />
             <Routes>
-              <Route path='/' element={<Main />}></Route>
-              <Route path='/news' element={<News />}></Route>
-              <Route path='/about' element={<About />}></Route>
-              <Route path='/cart' element={<Navigate to='/' />}></Route>
-              <Route path='/favorites' element={<Navigate to='/' />}></Route>
-              <Route path='/contacts' element={<Contact />}></Route>
+              <Route path='/' element={<Loyout />}>
+                <Route path='/' element={<Main />}></Route>
+                <Route path='/news' element={<News />}></Route>
+                <Route path='/about' element={<About />}></Route>
+                <Route path='/cart' element={<CartPage />}></Route>
+                <Route path='/favorites' element={<Favorite />}></Route>
+                <Route path='/contacts' element={<Contact />}></Route>
+              </Route>
+                <Route path='*' element={<NotFound />}></Route>
             </Routes>
             <SignIn />
         </Context.Provider>
@@ -44,14 +46,16 @@ function App() {
 
   return (
      <Context.Provider value={value}>
-        <Header />
           <Routes>
-            <Route path='/' element={<Main />}></Route>
-            <Route path='/news' element={<News />}></Route>
-            <Route path='/about' element={<About />}></Route>
-            <Route path='/cart' element={<CartPage />}></Route>
-            <Route path='/favorites' element={<Favorite />}></Route>
-            <Route path='/contacts' element={<Contact />}></Route>
+              <Route path='/' element={<Loyout />}>
+                <Route path='/' element={<Main />}></Route>
+                <Route path='/news' element={<News />}></Route>
+                <Route path='/about' element={<About />}></Route>
+                <Route path='/cart' element={<CartPage />}></Route>
+                <Route path='/favorites' element={<Favorite />}></Route>
+                <Route path='/contacts' element={<Contact />}></Route>
+              </Route>
+            <Route path='*' element={<NotFound />}></Route>
           </Routes>
           <SignIn />
       </Context.Provider>

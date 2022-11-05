@@ -13,8 +13,8 @@ module.exports.usersController = {
                 return res.status(401).json('Пользователь с таким e-mail уже существует!')
             } else if (email.length === 0 || password.length === 0) {
                 return res.status(401).json('Поле ввода не может бьть пустым!')
-            } else if (password.length < 4 || password.length > 32) {
-                return res.status(401).json('Пароль должен быть не меньше 4 и не больше 32 символов') 
+            } else if (password.length < 4 || password.length > 10) {
+                return res.status(401).json('Пароль должен быть не меньше 4 и не больше 10 символов') 
             }
             const hash = await bcrypt.hash(password, 8)
             const user = await User.create({

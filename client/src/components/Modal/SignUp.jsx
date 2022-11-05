@@ -4,8 +4,8 @@ import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import "./auth.sass";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { authSignUp } from './../../features/userSlice';
+import { Link } from "react-router-dom";
+import { authSignUp } from "./../../features/userSlice";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
 
-  const error = useSelector(state => state.user.error1)
+  const error = useSelector((state) => state.user.error1);
 
   const tooglePassword = () => {
     setPasswordShown(!passwordSwown);
@@ -32,18 +32,18 @@ const SignUp = () => {
     e.preventDefault();
     dispatch(authSignUp({ email, password })).then((data) => {
       if (!data.error) {
-        setRegistr(false)
-        setModalActive(true)
+        setRegistr(false);
+        setModalActive(true);
       }
-    })
+    });
   };
 
   const { modalActive, setModalActive, setRegistr } = useContext(Context);
 
   const handleClick = () => {
-    setRegistr(false)
-    setModalActive(true)
-  }
+    setRegistr(false);
+    setModalActive(true);
+  };
 
   return (
     <div
@@ -54,6 +54,7 @@ const SignUp = () => {
         className={modalActive ? "modal__content active" : "modal__content"}
         onClick={(e) => e.stopPropagation()}
       >
+        <h1>Регистрация</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"
@@ -76,7 +77,7 @@ const SignUp = () => {
           </div>
           {error && <div className="err">{error}</div>}
           <button type="submit">Зарегистрироваться</button>
-          <p style={{fontSize : '14px', marginTop : '10px'}}>
+          <p style={{ fontSize: "14px", marginTop: "10px" }}>
             Уже есть аккаунт? <Link onClick={handleClick}>Войдите</Link>
           </p>
         </form>

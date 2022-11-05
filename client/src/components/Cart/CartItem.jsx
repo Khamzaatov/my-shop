@@ -1,6 +1,6 @@
 import cart from "./cart.module.sass";
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -16,8 +16,8 @@ const CartItem = ({ name, img, price, amount, id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [dispatch])
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const removeItem = (id) => {
     dispatch(deleteProduct(id));
@@ -40,13 +40,24 @@ const CartItem = ({ name, img, price, amount, id }) => {
         <div className={cart.name}>{name}</div>
         <div className={cart.price}>{price}</div>
         <div className={cart.amount}>
-          <AiFillPlusCircle onClick={() => incItem(id)} className={cart.plus} /> {amount}
-          {amount > 1 ? <AiFillMinusCircle onClick={() => decItem(id)} className={cart.minus} /> : <AiFillMinusCircle style={{cursor : 'default'}} className={cart.minus} />}
+          <AiFillPlusCircle onClick={() => incItem(id)} className={cart.plus} />{" "}
+          {amount}
+          {amount > 1 ? (
+            <AiFillMinusCircle
+              onClick={() => decItem(id)}
+              className={cart.minus}
+            />
+          ) : (
+            <AiFillMinusCircle
+              style={{ cursor: "default" }}
+              className={cart.minus}
+            />
+          )}
         </div>
         <div className={cart.total}>{amount * price}</div>
         <div className={cart.remove}>
           <IconButton className={cart.remove__icon} aria-label="delete">
-            <DeleteIcon onClick={() => removeItem(id)}/>
+            <DeleteIcon onClick={() => removeItem(id)} />
           </IconButton>
         </div>
       </div>
