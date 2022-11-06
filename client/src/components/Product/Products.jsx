@@ -6,7 +6,10 @@ import { addProduct, fetchCart } from "../../features/cartSlice";
 import Button from '@mui/material/Button';
 import { addProductFavorite } from "../../features/favoriteSlice";
 import { BsFillBookmarkFill } from 'react-icons/bs'
+import { FiMoreVertical } from 'react-icons/fi'
+import IconButton from "@mui/material/IconButton";
 import { fetchFavorite, deleteProductFavorite } from './../../features/favoriteSlice';
+import { Link } from "react-router-dom";
 
 
 const Products = ({ name, price, img, left, id, basket }) => {
@@ -53,6 +56,11 @@ const Products = ({ name, price, img, left, id, basket }) => {
   return (
     <div className={product.card}>
       <div className={product.image}>
+        <Link to={`/details/${id}`}>
+          <IconButton title="Подробнее" className={product.details}>
+            <FiMoreVertical />
+          </IconButton>
+        </Link> 
         <img src={img} alt="" />
       </div>
       <div className={product.name}>

@@ -22,16 +22,20 @@ const Category = () => {
   };
 
   const handleChangeSearch = (e) => {
-    setSearch(e.target.value)
-    console.log(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   return (
     <div className={cat.container}>
       <div className={cat.row}>
         <div className={cat.search}>
           <div className={cat.title}>Поиск</div>
-          <input type="text" value={search} onChange={handleChangeSearch} placeholder="Я ищу..." />
+          <input
+            type="text"
+            value={search}
+            onChange={handleChangeSearch}
+            placeholder="Я ищу..."
+          />
         </div>
         <div className={cat.category}>
           <div className={cat.title}>Категории</div>

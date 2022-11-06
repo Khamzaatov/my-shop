@@ -16,18 +16,6 @@ const SignUp = () => {
 
   const error = useSelector((state) => state.user.error1);
 
-  const tooglePassword = () => {
-    setPasswordShown(!passwordSwown);
-  };
-
-  const handleSetEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSetPassword = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(authSignUp({ email, password })).then((data) => {
@@ -59,20 +47,26 @@ const SignUp = () => {
           <input
             type="text"
             value={email}
-            onChange={handleSetEmail}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail"
           />
           <div className="password-eye">
             <input
               type={passwordSwown ? "text" : "password"}
               value={password}
-              onChange={handleSetPassword}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Пароль"
             />
             {passwordSwown ? (
-              <AiFillEye className="eye" onClick={tooglePassword} />
+              <AiFillEye
+                className="eye"
+                onClick={() => setPasswordShown(!passwordSwown)}
+              />
             ) : (
-              <AiFillEyeInvisible className="eye" onClick={tooglePassword} />
+              <AiFillEyeInvisible
+                className="eye"
+                onClick={() => setPasswordShown(!passwordSwown)}
+              />
             )}
           </div>
           {error && <div className="err">{error}</div>}

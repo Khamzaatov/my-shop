@@ -12,6 +12,7 @@ import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
 import NotFound from './pages/NotFound/NotFound';
 import Loyout from './Loyout/Loyout';
+import ProductPage from './pages/Product/ProductPage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                 <Route path='/cart' element={<CartPage />}></Route>
                 <Route path='/favorites' element={<Favorite />}></Route>
                 <Route path='/contacts' element={<Contact />}></Route>
+                <Route path='/details/:id' element={<ProductPage/>}></Route>
               </Route>
                 <Route path='*' element={<NotFound />}></Route>
             </Routes>
@@ -54,6 +56,7 @@ function App() {
                 <Route path='/cart' element={<CartPage />}></Route>
                 <Route path='/favorites' element={<Favorite />}></Route>
                 <Route path='/contacts' element={<Contact />}></Route>
+                <Route path='/details/:id' element={<ProductPage/>}></Route>
               </Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>

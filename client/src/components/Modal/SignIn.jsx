@@ -18,18 +18,6 @@ const SignIn = () => {
 
   const error = useSelector((state) => state.user.error2);
 
-  const tooglePassword = () => {
-    setPasswordShown(!passwordSwown);
-  };
-
-  const handleSetEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSetPassword = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(authSignIn({ email, password })).then((data) => {
@@ -42,16 +30,6 @@ const SignIn = () => {
 
   const { modalActive, setModalActive, registr, setRegistr } =
     useContext(Context);
-
-  const handleClick = () => {
-    setRegistr(true);
-  };
-
-  const handleError = () => {
-    if (!error) {
-      setModalActive(false);
-    }
-  };
 
   return (
     <>
@@ -69,30 +47,33 @@ const SignIn = () => {
               <input
                 type="text"
                 value={email}
-                onChange={handleSetEmail}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="E-mail"
               />
               <div className="password-eye">
                 <input
                   type={passwordSwown ? "text" : "password"}
                   value={password}
-                  onChange={handleSetPassword}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Пароль"
                 />
                 {passwordSwown ? (
-                  <AiFillEye className="eye" onClick={tooglePassword} />
+                  <AiFillEye
+                    className="eye"
+                    onClick={() => setPasswordShown(!passwordSwown)}
+                  />
                 ) : (
                   <AiFillEyeInvisible
                     className="eye"
-                    onClick={tooglePassword}
+                    onClick={() => setPasswordShown(!passwordSwown)}
                   />
                 )}
               </div>
               {error && <div className="err">Неверный логин или пароль!</div>}
-              <button onClick={handleError}>Войти</button>
+              <button>Войти</button>
               <p style={{ fontSize: "14px", marginTop: "10px" }}>
                 Ещё нет аккаунта?{" "}
-                <Link onClick={handleClick}>Зарегистрируйтесь</Link>
+                <Link onClick={() => setRegistr(true)}>Зарегистрируйтесь</Link>
               </p>
             </form>
           </div>

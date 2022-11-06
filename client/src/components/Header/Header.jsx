@@ -1,28 +1,47 @@
 import header from "./header.module.sass";
-import { BsFillBagFill } from "react-icons/bs";
+import { IoCart } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 import { SiNike } from "react-icons/si";
 import { ImExit } from "react-icons/im";
 import { Context } from "./../../context/context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsHeartFill } from "react-icons/bs";
 import { signOut } from "../../features/userSlice";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
+import '../../style.sass'
 
 const Header = () => {
+  const [position, setPosition] = useState(window.pageYOffset)
+  const [visible, setVisible] = useState(true)
+
   const dispatch = useDispatch();
   const { setModalActive } = useContext(Context);
   const token = useSelector((state) => state.user.token);
   const amount = useSelector((state) => state.cart.cart.products?.length);
+
+  const cls = visible ? "visible" : "hidden";
+
+  useEffect(()=> {
+    const handleScroll = () => {
+       let moving = window.pageYOffset
+       
+       setVisible(position > moving);
+       setPosition(moving)
+    };
+    window.addEventListener("scroll", handleScroll);
+    return(() => {
+       window.removeEventListener("scroll", handleScroll);
+    })
+})
 
   const exit = () => {
     dispatch(signOut());
   };
 
   return (
-    <div className={header.container}>
+    <header className={cls}>
       <div className={header.logo}>
         <SiNike />
       </div>
@@ -80,13 +99,13 @@ const Header = () => {
               <div className={header.amount}>9+</div>
             ) : null}
             <NavLink to="/cart">
-              <BsFillBagFill className={header.cart_icon} title="Корзина" />
+              <IoCart className={header.cart_icon} title="Корзина" />
             </NavLink>
           </div>
         ) : (
           <div className={header.cart}>
             <NavLink to="/cart">
-              <BsFillBagFill
+              <IoCart
                 className={header.cart_icon}
                 title="Корзина"
               />
@@ -105,7 +124,7 @@ const Header = () => {
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

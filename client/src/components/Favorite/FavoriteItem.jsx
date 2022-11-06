@@ -18,10 +18,6 @@ const FavoriteItem = ({ name, id, price, left, img }) => {
     return false;
   });
 
-  useEffect(() => {
-    dispatch(fetchFavorite())
-  }, [dispatch])
-
   const removeItem = (id) => {
     dispatch(deleteProductFavorite(id));
   };
