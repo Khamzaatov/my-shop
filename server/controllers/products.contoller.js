@@ -2,14 +2,15 @@ const Product = require("../Models/Product.model");
 
 module.exports.productsController = {
     createProducts : async (req, res) => {
-        const { name, price, category, img, left } = req.body
+        const { name, price, category, img, left, photos } = req.body
         try {
             const product = await Product.create({
                 name,
                 price,
                 category,
                 img,
-                left
+                left,
+                photos
             })
             res.json(product)
         } catch (e) {

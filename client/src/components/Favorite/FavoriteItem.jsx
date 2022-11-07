@@ -1,10 +1,9 @@
 import favorite from "./favorite.module.sass";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductFavorite, fetchFavorite } from "./../../features/favoriteSlice";
+import { deleteProductFavorite } from "./../../features/favoriteSlice";
 import { VscChromeClose } from "react-icons/vsc";
 import Button from "@mui/material/Button";
 import { addProduct } from "../../features/cartSlice";
-import { useEffect } from "react";
 
 const FavoriteItem = ({ name, id, price, left, img }) => {
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const FavoriteItem = ({ name, id, price, left, img }) => {
   };
 
   return (
-    <>  
+    <>
       <div className={favorite.card} key={id}>
         <div className={favorite.image}>
           <VscChromeClose

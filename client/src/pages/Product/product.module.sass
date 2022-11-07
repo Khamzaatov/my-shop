@@ -42,10 +42,12 @@
                 background-color: #000
                 color: #fff
                 border-radius: 30px
+                border: none
                 font-size: 18px
-                &:hover
-                    background-color: #757575
-                    border: none
+                position: relative
+                // &:hover
+                //     background-color: #757575
+                //     border: none
         .block2
             margin-top: 15px
             button
@@ -55,16 +57,20 @@
                 border: 1px solid #ccc
                 color: #000
                 font-size: 18px
+                z-index: 0
                 &:hover
                    border: 1px solid #000 
 
     .image
-        width: 48%
+        width: 50%
         display: flex
         align-items: center
         flex-direction: column
         position: relative
         justify-content: center
+        .carousel
+            width: 650px
+            margin-right: 20px
         .back
             display: flex
             align-items: center
@@ -82,10 +88,8 @@
             .icon
                 font-size: 24px
         img
-            margin-right: 40px
             margin-top: 12px
-            height: 570px
-            width: 89.6%
+            object-fit: cover
     .info
         width: 48%
         display: flex
@@ -101,4 +105,7 @@
             width: 400px
             margin: 20px 330px 0 0
 
-    
+.loader
+    *
+        position: absolute
+        left: 120px

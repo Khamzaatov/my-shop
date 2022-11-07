@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import style from "./product.module.sass";
+import Carousel from "react-bootstrap/Carousel";
+import Loader from "react-js-loader";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -7,15 +9,24 @@ import { fetchProducts } from "./../../features/productSlice";
 import { useDispatch } from "react-redux";
 import { BsHeart } from "react-icons/bs";
 import { IoCart, IoChevronBackSharp } from "react-icons/io5";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { Context } from "./../../context/context";
-import { fetchCart } from "../../features/cartSlice";
+import { fetchCart, addProduct } from "../../features/cartSlice";
+import { useSound } from "use-sound";
+import sound from "../../assets/sound/song.mp3";
 
 const ProductPage = () => {
-  const { setModalActive } = useContext(Context);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id } = useParams();
+
+  const [play] = useSound(sound);
+
+  const token = useSelector((state) => state.user.token);
+  const cart = useSelector((state) => state.cart.cart.products);
+  const loader = useSelector((state) => state.cart.loader);
+  const products = useSelector((state) => state.product.products);
+  const product = products.find((item) => item._id === id);
 
   useEffect(() => {
     dispatch(fetchProducts("Все"));
@@ -25,18 +36,40 @@ const ProductPage = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const token = useSelector((state) => state.user.token);
-  const products = useSelector((state) => state.product.products);
-  const product = products.find((item) => item._id === id);
+  const handleClick = (id) => {
+    dispatch(addProduct(id));
+  };
+
+  const inCart = cart?.find((item) => {
+    if (item.productId._id === product?._id) {
+      return item;
+    }
+    return false;
+  });
+
+  const { setModalActive } = useContext(Context);
 
   return (
     <div className={style.container}>
       <div className={style.image}>
         <div className={style.back} onClick={() => navigate(-1)}>
-          <IoChevronBackSharp className={style.icon}/>
+          <IoChevronBackSharp className={style.icon} />
           <span>Назад</span>
         </div>
-        <img src={product?.img} alt="" />
+        <Carousel className={style.carousel}>
+          {product?.photos.map((item) => {
+            return (
+              <Carousel.Item>
+                <img
+                  style={{ height: "570px" }}
+                  className="d-block w-100"
+                  src={item}
+                  alt=""
+                />
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
       </div>
       <div className={style.info}>
         <h1>{product?.name}</h1>
@@ -57,11 +90,31 @@ const ProductPage = () => {
                   disabled={product?.left === 0}
                   className={style.one}
                 >
-                  Добавить в корзину <IoCart style={{ fontSize: "22px" }} />
+                  Нет в наличии <IoCart style={{ fontSize: "22px" }} />
                 </button>
               ) : (
-                <button className={style.one}>
-                  Добавить в корзину <IoCart style={{ fontSize: "22px" }} />
+                <button
+                  className={style.one}
+                  disabled={inCart}
+                  onClick={() => {
+                    handleClick(product._id);
+                    play();
+                  }}
+                >
+                  {loader ? (
+                    <div className={style.loader}>
+                      <Loader type="spinner-cub" bgColor={"#fff"} size={25} />
+                    </div>
+                  ) : !inCart ? (
+                    <span>
+                      Добавить в корзину <IoCart style={{ fontSize: "22px" }} />
+                    </span>
+                  ) : (
+                    <span>
+                      Уже в корзине{" "}
+                      <AiFillCheckCircle style={{ fontSize: "22px" }} />
+                    </span>
+                  )}
                 </button>
               )
             ) : (

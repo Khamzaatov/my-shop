@@ -21,7 +21,7 @@ const Index = () => {
 
   useEffect(() => {
     dispatch(fetchFavorite());
-  });
+  })
 
   useEffect(() => {
     dispatch(fetchCart())

@@ -4,7 +4,13 @@ const productSchema = mongoose.Schema({
     price : Number,
     category : String,
     left : Number,
-    img : String
+    img : String,
+    photos: [
+    {
+        type: String 
+    }
+]
+
 })
 
 const Product = mongoose.model('Product', productSchema)

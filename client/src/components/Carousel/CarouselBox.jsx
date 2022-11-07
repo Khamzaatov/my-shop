@@ -1,9 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
-import sneak8 from "../../assets/sneak1.jpg";
-import sneak5 from "../../assets/sneak5.jpg";
-import sneak1 from "../../assets/sneak8.jpg";
-import sneak9 from "../../assets/sneak9.jpg";
-import nike from "../../assets/nike.jpg";
+import sneak8 from "../../assets/images/sneak1.jpg";
+import sneak5 from "../../assets/images/sneak5.jpg";
+import sneak1 from "../../assets/images/sneak8.jpg";
+import sneak9 from "../../assets/images/sneak9.jpg";
+import nike from "../../assets/images/nike.jpg";
 import carousel from "./carousel.module.sass";
 
 const CarouselBox = () => {

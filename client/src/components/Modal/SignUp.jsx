@@ -11,10 +11,34 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordSwown, setPasswordShown] = useState(false);
+  const [blur1, setBlur1] = useState(false);
+  const [blur2, setBlur2] = useState(false);
 
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.user.error1);
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    setBlur1(false);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setBlur2(false);
+  };
+
+  const handleBlur = () => {
+    if (!email) {
+      setBlur1(true);
+    }
+  };
+
+  const handleBlur2 = () => {
+    if (!password) {
+      setBlur2(true);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,15 +71,27 @@ const SignUp = () => {
           <input
             type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onBlur={handleBlur}
+            onChange={handleEmail}
             placeholder="E-mail"
+            style={
+              blur1
+                ? { border: "1px solid red" }
+                : { border: "1px solid #d5d5d5" }
+            }
           />
           <div className="password-eye">
             <input
               type={passwordSwown ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onBlur={handleBlur2}
+              onChange={handlePassword}
               placeholder="Пароль"
+              style={
+                blur2
+                  ? { border: "1px solid red" }
+                  : { border: "1px solid #d5d5d5" }
+              }
             />
             {passwordSwown ? (
               <AiFillEye

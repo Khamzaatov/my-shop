@@ -93,7 +93,7 @@ const Products = ({ name, price, img, left, id, basket }) => {
                 Нет в наличии
               </Button>
             ) : (
-              <Button variant="outlined" className={product.inBasket} disabled={left === 0} onClick={() => handleClick(id)}>
+              <Button variant="outlined" className={product.inBasket} onClick={() => handleClick(id)}>
                 В корзину
               </Button>
             )

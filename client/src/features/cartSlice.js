@@ -97,6 +97,10 @@ const cartSlice = createSlice({
         })
         .addCase(addProduct.fulfilled, (state, action) => {
             state.cart = action.payload
+            state.loader = false
+        })
+        .addCase(addProduct.pending, (state, action) => {
+            state.loader = true
         })
         .addCase(deleteProduct.fulfilled, (state, action) => {
             state.cart = action.payload

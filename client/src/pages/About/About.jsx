@@ -1,6 +1,6 @@
 import BlockAbout from '../../components/Block/BlockAbout';
-import kross from '../../assets/kross1.jpg'
-import nike from '../../assets/sneak2.jpg'
+import kross from '../../assets/images/kross1.jpg'
+import nike from '../../assets/images/sneak2.jpg'
 import about from './about.module.sass'
 import Footer from '../../components/Footer/Footer';
 
