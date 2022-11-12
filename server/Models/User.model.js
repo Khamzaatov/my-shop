@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const userSchema = mongoose.Schema({
-    name : String,
     email : {
         type : String,
         required : true,  
@@ -10,7 +9,9 @@ const userSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    icon : String
+    username : String,
+    phone: Number,
+    gender: String,
 })
 
 const User = mongoose.model('User', userSchema)

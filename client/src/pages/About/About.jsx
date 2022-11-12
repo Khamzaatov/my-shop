@@ -3,8 +3,22 @@ import kross from '../../assets/images/kross1.jpg'
 import nike from '../../assets/images/sneak2.jpg'
 import about from './about.module.sass'
 import Footer from '../../components/Footer/Footer';
+// import { useSelector } from 'react-redux';
+// import { useEffect } from 'react';
+// import { fetchUser } from './../../features/userSlice';
+// import { useDispatch } from 'react-redux';
 
 const About = () => {
+    // const dispatch = useDispatch()
+    // const user = useSelector(state => state.user.profile)
+
+    // console.log(user.email)
+
+    // useEffect(() => {
+    //     dispatch(fetchUser())
+    // }, [dispatch])
+
+
     return (
         <div className={about.container}>
              <BlockAbout />
@@ -13,7 +27,7 @@ const About = () => {
                     <img src={nike} alt="" />
                 </div>
                 <div className={about.info}>
-                    <h3>Важно!!!</h3>
+                    <h3>Важно</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit dignissimos distinctio illum excepturi neque placeat molestias quae amet odit quisquam, debitis quod pariatur fugiat reprehenderit. Accusantium est minus illo? Veritatis assumenda, accusamus voluptatibus laborum quaerat, a ut perspiciatis porro id iure consectetur architecto, recusandae repellat doloremque! Numquam, quidem eius? Delectus?</p>
                 </div>
              </div>

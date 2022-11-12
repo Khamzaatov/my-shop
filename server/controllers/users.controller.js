@@ -62,5 +62,14 @@ module.exports.usersController = {
         } catch (e) {
             res.status(401).json(e.message)
         }
+    },
+    userFindOne : async (req, res) => {
+        const { userId } = req.params
+        try {
+            const user = await User.findById(userId)
+            res.json(user)
+        } catch (err) {
+            res.json(err.message)
+        }
     }
 }

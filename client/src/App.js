@@ -2,7 +2,7 @@ import './style.sass'
 import { Context } from './context/context';
 import { useState } from 'react';
 import Main from './pages/Main/Main';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import About from './pages/About/About';
 import CartPage from './pages/Cart/CartPage';
@@ -13,6 +13,7 @@ import Contact from './pages/Contact/Contact';
 import NotFound from './pages/NotFound/NotFound';
 import Loyout from './Loyout/Loyout';
 import ProductPage from './pages/Product/ProductPage';
+import Profile from './pages/Profile/Profile';
 
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
   const [min, setMin] = useState("")
   const [max, setMax] = useState("")
   const [search, setSearch] = useState("")
+  const [block, setBlock] = useState(false)
 
-  const value = { modalActive, registr, min, max, search, setModalActive, setRegistr, setMin, setMax, setSearch }
+  const value = { modalActive, registr, min, max, search, block, setModalActive, setRegistr, setMin, setMax, setSearch, setBlock }
 
   if (!token) {
     return (
@@ -38,6 +40,7 @@ function App() {
                 <Route path='/favorites' element={<Favorite />}></Route>
                 <Route path='/contacts' element={<Contact />}></Route>
                 <Route path='/details/:id' element={<ProductPage/>}></Route>
+                <Route path='/profile' element={<Navigate to='/' />}></Route>
               </Route>
                 <Route path='*' element={<NotFound />}></Route>
             </Routes>
@@ -57,6 +60,7 @@ function App() {
                 <Route path='/favorites' element={<Favorite />}></Route>
                 <Route path='/contacts' element={<Contact />}></Route>
                 <Route path='/details/:id' element={<ProductPage/>}></Route>
+                <Route path='/profile' element={<Profile />}></Route>
               </Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>

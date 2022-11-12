@@ -47,7 +47,7 @@ const Cart = () => {
           })
         ) : (
           <div className={cart.notInBasket}>
-            Ваша корзина пустая! <BsBagXFill />
+            Ваша корзина пуста <BsBagXFill />
           </div>
         )
       ) : (

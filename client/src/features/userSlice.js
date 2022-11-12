@@ -1,5 +1,16 @@
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
+export const fetchUser = createAsyncThunk('fetch/user', async (_, thunkAPI) => {
+    try {
+        const userId = await thunkAPI.getState().user.user
+        const response = await fetch(`http://localhost:4000/user/${userId}`)
+        const data = response.json()
+        return data
+    } catch (e) {
+        thunkAPI.rejectWithValue(e.message)
+    }
+})
+
 export const authSignUp = createAsyncThunk('auth/signUp', async ({ email, password }, thunkAPI) => {
     try {
         const response = await fetch('http://localhost:4000/registration', {
@@ -57,7 +68,8 @@ const userSlice = createSlice({
         signIn : false,
         signUp : false,
         token : localStorage.getItem('token'),
-        user : localStorage.getItem('user')
+        user : localStorage.getItem('user'),
+        profile: []
     },
     reducers : {
         signOut : (state) => {
@@ -94,6 +106,9 @@ const userSlice = createSlice({
             state.error2 = null
             state.token = action.payload.token
             state.user = action.payload.user
+        })
+        .addCase(fetchUser.fulfilled, (state, action) => {
+            state.profile = action.payload
         })
     }
 })

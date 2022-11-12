@@ -20,13 +20,7 @@ const Info = () => {
             src="https://assets.gq.ru/photos/613af1dc99aecdd0dc66c3d2/master/w_1600%2Cc_limit/GettyImages-1235139698.jpg"
             alt=""
           />
-          <Link
-            to="product"
-            spy={true}
-            smooth={true}
-            offset={-50}
-            duration={500}
-          >
+          <Link to="product" offset={0} duration={500}>
             <div onClick={() => getCategory("Мужские")} className={info.text}>
               Мужчинам
             </div>
@@ -37,13 +31,7 @@ const Info = () => {
             src="https://ohfashion.ru/wp-content/uploads/2019/08/Devushka-v-velosipednyih-shortah-rozovyiy-bleyzer-i-krossovki.jpg"
             alt=""
           />
-          <Link
-            to="product"
-            spy={true}
-            smooth={true}
-            offset={-50}
-            duration={500}
-          >
+          <Link to="product" offset={0} duration={500}>
             <div onClick={() => getCategory("Женские")} className={info.text}>
               Женщинам
             </div>
@@ -54,13 +42,7 @@ const Info = () => {
             src="https://st2.depositphotos.com/2002575/8222/i/950/depositphotos_82222852-stock-photo-fashionable-child-in-leather-coat.jpg"
             alt=""
           />
-          <Link
-            to="product"
-            spy={true}
-            smooth={true}
-            offset={-50}
-            duration={500}
-          >
+          <Link to="product" offset={0} duration={500}>
             <div onClick={() => getCategory("Детские")} className={info.text}>
               Детям
             </div>

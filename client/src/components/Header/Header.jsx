@@ -11,16 +11,21 @@ import { signOut } from "../../features/userSlice";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
 import '../../style.sass'
+import { fetchCart } from './../../features/cartSlice';
 
 const Header = () => {
   const [position, setPosition] = useState(window.pageYOffset)
   const [visible, setVisible] = useState(true)
 
   const dispatch = useDispatch();
-  const { setModalActive } = useContext(Context);
+  const { setModalActive, block, setBlock } = useContext(Context);
   const token = useSelector((state) => state.user.token);
   const amount = useSelector((state) => state.cart.cart.products?.length);
 
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
+  
   const cls = visible ? "visible" : "hidden";
 
   useEffect(()=> {
@@ -29,6 +34,7 @@ const Header = () => {
        
        setVisible(position > moving);
        setPosition(moving)
+       setBlock(false)
     };
     window.addEventListener("scroll", handleScroll);
     return(() => {
@@ -112,16 +118,23 @@ const Header = () => {
             </NavLink>
           </div>
         )}
-        <div className={header.user}>
+        <div className={header.user} onClick={() => setBlock(!block)}>
           {!token ? (
             <FaUserAlt
               title="Вход"
               onClick={() => setModalActive(true)}
-              style={{ fontSize: "24px" }}
+              className={header.user__icon}
             />
           ) : (
-            <ImExit title="Выход" onClick={exit} className={header.exit} />
+            <FaUserAlt
+              title="Вход"
+              className={header.user__icon}
+            />
           )}
+          {(token && block) && <div className={header.user__block}>
+            <NavLink to='/profile'><li>Профиль</li></NavLink>
+            <li onClick={exit}>Выход</li>
+          </div>}
         </div>
       </div>
     </header>

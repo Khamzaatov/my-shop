@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { fetchProducts } from "./../../features/productSlice";
 import { Context } from './../../context/context';
 
+
 const Product = () => {
   const { min, max, search } = useContext(Context)
 
@@ -17,8 +18,8 @@ const Product = () => {
     dispatch(fetchProducts('Все'));
   }, [dispatch]);
 
-  const filteredSneakears = products.filter((el) => {
-     return el.name.toLowerCase().includes(search.toLowerCase())
+  const filteredSneakears = products.filter((item) => {
+     return item.name.toLowerCase().includes(search.toLowerCase())
   })
 
   return (

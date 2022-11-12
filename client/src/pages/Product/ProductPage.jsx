@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import style from "./product.module.sass";
 import Carousel from "react-bootstrap/Carousel";
+import Zoom from 'react-img-zoom'
 import Loader from "react-js-loader";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -29,23 +30,18 @@ const ProductPage = () => {
   const product = products.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(fetchProducts("Все"));
-  }, [dispatch]);
+    dispatch(fetchCart());
+  });
 
   useEffect(() => {
-    dispatch(fetchCart());
+    dispatch(fetchProducts("Все"));
   }, [dispatch]);
 
   const handleClick = (id) => {
     dispatch(addProduct(id));
   };
 
-  const inCart = cart?.find((item) => {
-    if (item.productId._id === product?._id) {
-      return item;
-    }
-    return false;
-  });
+  const inCart = cart?.find(item => item.productId._id === product?._id)
 
   const { setModalActive } = useContext(Context);
 
@@ -59,13 +55,15 @@ const ProductPage = () => {
         <Carousel className={style.carousel}>
           {product?.photos.map((item) => {
             return (
-              <Carousel.Item>
-                <img
-                  style={{ height: "570px" }}
-                  className="d-block w-100"
-                  src={item}
-                  alt=""
-                />
+              <Carousel.Item className={style.img_item}>
+                <div className={style.zoom}>
+                  <Zoom
+                    img={item}
+                    zoomScale={2.5}
+                    width={650}
+                    height={575}
+                  />
+                </div>
               </Carousel.Item>
             );
           })}
@@ -79,7 +77,7 @@ const ProductPage = () => {
         </h3>
         <h3>
           В наличии :{" "}
-          <span style={{ fontWeight: "bold" }}>{product?.left} штук</span>
+          <span style={{ fontWeight: "bold" }}>{product?.left}</span>
         </h3>
         <div className={style.btn}>
           <div className={style.block1}>

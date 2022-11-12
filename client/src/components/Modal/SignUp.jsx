@@ -107,7 +107,7 @@ const SignUp = () => {
           </div>
           {error && <div className="err">{error}</div>}
           <button type="submit">Зарегистрироваться</button>
-          <p style={{ fontSize: "14px", marginTop: "10px" }}>
+          <p className="link">
             Уже есть аккаунт? <Link onClick={handleClick}>Войдите</Link>
           </p>
         </form>

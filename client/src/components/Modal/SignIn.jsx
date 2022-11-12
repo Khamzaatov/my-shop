@@ -17,8 +17,8 @@ const SignIn = () => {
   const [blur2, setBlur2] = useState(false);
 
   const dispatch = useDispatch();
-
   const error = useSelector((state) => state.user.error2);
+  const { modalActive, setModalActive, registr, setRegistr, setBlock } = useContext(Context);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -50,10 +50,8 @@ const SignIn = () => {
       }
     });
     setModalActive(true);
+    setBlock(false)
   };
-
-  const { modalActive, setModalActive, registr, setRegistr } =
-    useContext(Context);
 
   return (
     <>
@@ -107,7 +105,7 @@ const SignIn = () => {
               </div>
               {error && <div className="err">Неверный логин или пароль!</div>}
               <button>Войти</button>
-              <p style={{ fontSize: "14px", marginTop: "10px" }}>
+              <p className='link'>
                 Ещё нет аккаунта?{" "}
                 <Link onClick={() => setRegistr(true)}>Зарегистрируйтесь</Link>
               </p>

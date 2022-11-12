@@ -1,4 +1,5 @@
 import favorite from "./favorite.module.sass";
+import IconButton from "@mui/material/IconButton";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductFavorite } from "./../../features/favoriteSlice";
 import { VscChromeClose } from "react-icons/vsc";
@@ -29,10 +30,9 @@ const FavoriteItem = ({ name, id, price, left, img }) => {
     <>
       <div className={favorite.card} key={id}>
         <div className={favorite.image}>
-          <VscChromeClose
-            onClick={() => removeItem(id)}
-            className={favorite.remove}
-          />
+          <IconButton className={favorite.remove}>
+            <VscChromeClose onClick={() => removeItem(id)} />
+          </IconButton>
           <img src={img} alt="" />
         </div>
         <div className={favorite.name}>

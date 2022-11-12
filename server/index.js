@@ -18,7 +18,7 @@ app.use(require('./routes/favorite.route'))
 
 mongoose.connect(process.env.MONGO, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true, 
   }).then(() => console.log('Успешно соединились с сервером MongoDB'))
   .catch(() => console.log('Ошибка при соединении с сервером MongoDB')) 
 

@@ -9,18 +9,29 @@
         .card
             width: 330px
             height: 523px
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)
+            // border: 1px solid #d5d5d5
+            // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)
             margin: 20px 40px 20px 0
+            &:hover
+                cursor: pointer
+                border: 0
+                transition: 200ms
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)
             .name
                 display: flex
                 justify-content: space-between
                 h4
                     font-weight: 700
-                    color: blue
+                    background: linear-gradient(21deg, #dd03e4, #5611ec)
+                    -webkit-background-clip: text
+                    -webkit-text-fill-color: transparent
                 .heart
                     cursor: pointer
                     font-size: 30px 
                     margin: 5px 20px 0 0
+                    &:hover
+                        color: gold
+                        transition: 200ms
                 .heartActive
                     cursor: pointer
                     font-size: 30px
