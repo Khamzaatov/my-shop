@@ -13,34 +13,10 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordSwown, setPasswordShown] = useState(false);
-  const [blur1, setBlur1] = useState(false);
-  const [blur2, setBlur2] = useState(false);
 
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.error2);
   const { modalActive, setModalActive, registr, setRegistr, setBlock } = useContext(Context);
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setBlur1(false);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setBlur2(false);
-  };
-
-  const handleBlur = () => {
-    if (!email) {
-      setBlur1(true);
-    }
-  };
-
-  const handleBlur2 = () => {
-    if (!password) {
-      setBlur2(true);
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +27,8 @@ const SignIn = () => {
     });
     setModalActive(true);
     setBlock(false)
+    setPassword("")
+    setEmail("")
   };
 
   return (
@@ -66,44 +44,40 @@ const SignIn = () => {
           >
             <h1>Авторизация</h1>
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={email}
-                onChange={handleEmail}
-                onBlur={handleBlur}
-                style={
-                  blur1
-                    ? { border: "1px solid red" }
-                    : { border: "1px solid #d5d5d5" }
-                }
-                placeholder="E-mail"
-              />
-              <div className="password-eye">
+              <p>
                 <input
-                  type={passwordSwown ? "text" : "password"}
-                  value={password}
-                  onBlur={handleBlur2}
-                  onChange={handlePassword}
-                  style={
-                    blur2
-                      ? { border: "1px solid red" }
-                      : { border: "1px solid #d5d5d5" }
-                  }
-                  placeholder="Пароль"
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder=" "
                 />
-                {passwordSwown ? (
-                  <AiFillEye
-                    className="eye"
-                    onClick={() => setPasswordShown(!passwordSwown)}
+                <label>E-mail</label>
+              </p>
+              <div className="password-eye">
+                <p>
+                  <input
+                    type={passwordSwown ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder=" "
                   />
-                ) : (
-                  <AiFillEyeInvisible
-                    className="eye"
-                    onClick={() => setPasswordShown(!passwordSwown)}
-                  />
-                )}
+                  <label>Пароль</label>
+                  {passwordSwown ? (
+                    <AiFillEye
+                      className="eye"
+                      onClick={() => setPasswordShown(!passwordSwown)}
+                    />
+                  ) : (
+                    <AiFillEyeInvisible
+                      className="eye"
+                      onClick={() => setPasswordShown(!passwordSwown)}
+                    />
+                  )}
+                </p>
               </div>
-              {error && <div className="err">Неверный логин или пароль!</div>}
+              {error && <div className="err" style={{top: '206px'}}>Неверный логин или пароль!</div>}
               <button>Войти</button>
               <p className='link'>
                 Ещё нет аккаунта?{" "}

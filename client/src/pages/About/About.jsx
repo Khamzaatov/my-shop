@@ -3,22 +3,9 @@ import kross from '../../assets/images/kross1.jpg'
 import nike from '../../assets/images/sneak2.jpg'
 import about from './about.module.sass'
 import Footer from '../../components/Footer/Footer';
-// import { useSelector } from 'react-redux';
-// import { useEffect } from 'react';
-// import { fetchUser } from './../../features/userSlice';
-// import { useDispatch } from 'react-redux';
+
 
 const About = () => {
-    // const dispatch = useDispatch()
-    // const user = useSelector(state => state.user.profile)
-
-    // console.log(user.email)
-
-    // useEffect(() => {
-    //     dispatch(fetchUser())
-    // }, [dispatch])
-
-
     return (
         <div className={about.container}>
              <BlockAbout />

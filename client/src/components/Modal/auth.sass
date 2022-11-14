@@ -13,12 +13,12 @@
     transition: 0.5s
     &__content
         padding: 20px
-        border-radius: 12px
+        border-radius: 10px
         background-color: #fff
         transform: scale(0.5)
         transition: 0.4s all
-        width: 30vw
-        height: 45vh
+        width: 28vw
+        height: 46vh
         h1
             margin-left: 90px
             color: #008080
@@ -36,17 +36,17 @@ form
     align-items: center
     flex-direction: column
     margin-top: 20px
-    input 
-        width: 400px
-        height: 40px
+    input
+        width: 377px
+        height: 46px
         margin-bottom: 18px
         outline: none
-        padding-left: 10px
-        border: 1px solid #d0d0d0
+        padding: 10px
+        border: 1px solid #d5d5d5
         border-radius: 4px
         font-size: 14px
     button 
-        width: 410px
+        width: 380px
         height: 44px
         font-size: 15px
         cursor: pointer
@@ -60,23 +60,88 @@ form
         &:hover
             background-color: blue
             transition: 100ms
+    select
+        width: 375px
+        height: 45px
+        margin-bottom: 18px
+        outline: none
+        cursor: pointer
+        padding-left: 15px
+        border: 1px solid #d0d0d0
+        border-radius: 4px
+        font-size: 14px
+        -moz-appearance: none
+        -webkit-appearance: none
+        appearance: none
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')
+        background-repeat: no-repeat, repeat
+        background-position: right 1.8em top 50%, 0 0
+        background-size: .65em auto, 100%
+        color: gray
+        option
+            font-size: 18px
+
+
+p
+    position: relative
+    margin-bottom: 1px
+    display: inline-block
+
+
+label 
+    padding: 10px
+    pointer-events: none
+    position: absolute
+    left: 7px
+    font-size: 16px
+    top: 1px
+    transition: 0.2s
+    transition-timing-function: ease
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1)
+    opacity: 0.7
+    background: #fff
+
+
+input:focus + label, input:not(:placeholder-shown) + label
+    opacity: 1
+    transform: scale(0.75) translateY(-70%) translateX(-14px)
+
+input:focus + .label-email, input:not(:placeholder-shown) + .label-email
+    margin-left: 10px
+    opacity: 1
+    transform: scale(0.75) translateY(-70%) translateX(-14px)
+
+input:focus + .label-password, input:not(:placeholder-shown) + .label-password
+    margin-left: 10px
+    opacity: 1
+    transform: scale(0.75) translateY(-70%) translateX(-14px)
 
 .password-eye
     display: flex
     position: relative
 
 .eye
-    margin: 10px 20px 0 -40px
+    margin: 0 20px 0 -40px
     font-size: 20px
     cursor: pointer
 
 .err
-    font-family: Geneva, Tahoma, Verdana, sans-serif
-    color : red
+    color: red
+    font-weight: 500
     position: absolute
-    top : 195px
+    margin-top: 40px
+    top: 245px
     left: 30px
     font-size: 14px
+
+.error
+    color: red
+    position: absolute
+    font-weight: 500
+    top: 120px
+    z-index: 1
+    left: 1px
+    font-size: 15px 
 
 .link
     font-size: 14px

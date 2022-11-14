@@ -6,7 +6,7 @@ const User = require("../Models/User.model");
 
 module.exports.usersController = {
     registration : async (req, res) => {
-        const { email, password } = req.body
+        const { email, password, username, phone, gender } = req.body
         try {
             const candidate = await User.findOne({ email })
             if (candidate) {
@@ -19,7 +19,10 @@ module.exports.usersController = {
             const hash = await bcrypt.hash(password, 8)
             const user = await User.create({
                 email,
-                password : hash
+                password : hash,
+                username,
+                phone,
+                gender
             })
             Cart.create({
                 userId : user._id

@@ -2,7 +2,6 @@ import header from "./header.module.sass";
 import { IoCart } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 import { SiNike } from "react-icons/si";
-import { ImExit } from "react-icons/im";
 import { Context } from "./../../context/context";
 import { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,8 +9,9 @@ import { BsHeartFill } from "react-icons/bs";
 import { signOut } from "../../features/userSlice";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import '../../style.sass'
+import avatar from '../../assets/images/logo.png'
 import { fetchCart } from './../../features/cartSlice';
+import '../../style.sass'
 
 const Header = () => {
   const [position, setPosition] = useState(window.pageYOffset)
@@ -126,10 +126,9 @@ const Header = () => {
               className={header.user__icon}
             />
           ) : (
-            <FaUserAlt
-              title="Вход"
-              className={header.user__icon}
-            />
+            <div className={header.user__avatar}>
+                <img src={avatar} alt="" />
+            </div>
           )}
           {(token && block) && <div className={header.user__block}>
             <NavLink to='/profile'><li>Профиль</li></NavLink>

@@ -25,6 +25,7 @@
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.7",
+    "react-text-mask": "^5.5.0",
     "sass": "^1.54.9",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"

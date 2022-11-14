@@ -5,56 +5,40 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import "./auth.sass";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import MaskedInput from 'react-text-mask'
 import { authSignUp } from "./../../features/userSlice";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("")
+  const [username, setUsername] = useState("")
+  const [phone, setPhone] = useState("")
+  const [gender, setGender] = useState("")
   const [passwordSwown, setPasswordShown] = useState(false);
-  const [blur1, setBlur1] = useState(false);
-  const [blur2, setBlur2] = useState(false);
+  const [passwordSwown2, setPasswordShown2] = useState(false);
+  const [submit,  setSubmit] = useState(false)
 
   const dispatch = useDispatch();
-
   const error = useSelector((state) => state.user.error1);
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setBlur1(false);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setBlur2(false);
-  };
-
-  const handleBlur = () => {
-    if (!email) {
-      setBlur1(true);
-    }
-  };
-
-  const handleBlur2 = () => {
-    if (!password) {
-      setBlur2(true);
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authSignUp({ email, password })).then((data) => {
-      if (!data.error) {
-        setRegistr(false);
-        setModalActive(true);
-      }
-    });
+    if ((password === password2) && (username, phone)) {
+      dispatch(authSignUp({ email, password, username, phone, gender })).then((data) => {
+        if (!data.error) {
+          setRegistr(false);
+          setModalActive(true);
+        }
+      });
+    }
+    setSubmit(true)
   };
 
   const { modalActive, setModalActive, setRegistr } = useContext(Context);
 
   const handleClick = () => {
     setRegistr(false);
-    setModalActive(true);
   };
 
   return (
@@ -63,49 +47,95 @@ const SignUp = () => {
       onClick={() => setModalActive(false)}
     >
       <div
+        style={{ height: "81vh" }}
         className={modalActive ? "modal__content active" : "modal__content"}
         onClick={(e) => e.stopPropagation()}
       >
         <h1>Регистрация</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={email}
-            onBlur={handleBlur}
-            onChange={handleEmail}
-            placeholder="E-mail"
-            style={
-              blur1
-                ? { border: "1px solid red" }
-                : { border: "1px solid #d5d5d5" }
-            }
-          />
-          <div className="password-eye">
+          <p>
+            <input type="text" placeholder=" " required value={username} onChange={(e) => setUsername(e.target.value)} />
+            <label>Имя пользователя</label>
+          </p>
+          <p>
             <input
-              type={passwordSwown ? "text" : "password"}
-              value={password}
-              onBlur={handleBlur2}
-              onChange={handlePassword}
-              placeholder="Пароль"
-              style={
-                blur2
-                  ? { border: "1px solid red" }
-                  : { border: "1px solid #d5d5d5" }
-              }
+              type="text"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder=" "
             />
-            {passwordSwown ? (
-              <AiFillEye
-                className="eye"
-                onClick={() => setPasswordShown(!passwordSwown)}
+            <label className="label-email">E-mail</label>
+          </p>
+          <select value={gender} onChange={(e) => setGender(e.target.value)} >
+            <option hidden>Пол (не обязательно)</option>
+            <option value='Мужской'>Мужской</option>
+            <option value='Женский'>Женский</option>
+          </select>
+          <div className="password-eye">
+            <p>
+              <input
+                type={passwordSwown ? "text" : "password"}
+                value={password}
+                required
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=" "
               />
-            ) : (
-              <AiFillEyeInvisible
-                className="eye"
-                onClick={() => setPasswordShown(!passwordSwown)}
-              />
-            )}
+              <label className="label-password">Пароль</label>
+              {passwordSwown ? (
+                <AiFillEye
+                  className="eye"
+                  onClick={() => setPasswordShown(!passwordSwown)}
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  className="eye"
+                  onClick={() => setPasswordShown(!passwordSwown)}
+                />
+              )}
+            </p>
           </div>
-          {error && <div className="err">{error}</div>}
+          <div className="password-eye">
+            <p>
+              <input
+                type={passwordSwown2 ? "text" : "password"}
+                placeholder=" "
+                required
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                stlye={{position : 'relative'}}
+              />
+              <label>Повторите пароль</label>
+              {(submit && password !== password2) && <div className="error">Пароли не совпадают</div>}
+              {passwordSwown2 ? (
+                <AiFillEye
+                  className="eye"
+                  onClick={() => setPasswordShown2(!passwordSwown2)}
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  className="eye"
+                  onClick={() => setPasswordShown2(!passwordSwown2)}
+                />
+              )}
+            </p>
+          </div>
+          <p>
+          <MaskedInput
+            mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            placeholder=" "
+            guide={false}
+            value={phone}
+            id="my-input-id"
+            onChange={(e) => setPhone(e.target.value)}
+          />
+            <label>Номер телефона</label>
+          </p>
+          {error && (
+            <div className="err" style={{ top: "427px" }}>
+              {error}
+            </div>
+          )}
           <button type="submit">Зарегистрироваться</button>
           <p className="link">
             Уже есть аккаунт? <Link onClick={handleClick}>Войдите</Link>

@@ -11,14 +11,14 @@ export const fetchUser = createAsyncThunk('fetch/user', async (_, thunkAPI) => {
     }
 })
 
-export const authSignUp = createAsyncThunk('auth/signUp', async ({ email, password }, thunkAPI) => {
+export const authSignUp = createAsyncThunk('auth/signUp', async ({ email, password, username, phone, gender }, thunkAPI) => {
     try {
         const response = await fetch('http://localhost:4000/registration', {
             method : 'POST',
             headers : {
                 "Content-Type" : "application/json"
             },
-            body : JSON.stringify({ email, password })
+            body : JSON.stringify({ email, password, username, phone, gender })
         })
 
         const json = await response.json()
