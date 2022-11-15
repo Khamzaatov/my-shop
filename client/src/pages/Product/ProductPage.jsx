@@ -61,7 +61,7 @@ const ProductPage = () => {
                     img={item}
                     zoomScale={2.5}
                     width={650}
-                    height={575}
+                    height={560}
                   />
                 </div>
               </Carousel.Item>

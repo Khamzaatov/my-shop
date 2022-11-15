@@ -1,13 +1,12 @@
 import product from "./products.module.sass";
-import { useContext, useEffect } from "react";
+import Button from "@mui/material/Button";
+import Loader from "react-js-loader";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Context } from "./../../context/context";
 import { addProduct, fetchCart } from "../../features/cartSlice";
-import Button from "@mui/material/Button";
 import { addProductFavorite, fetchFavorite } from "../../features/favoriteSlice";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { FiMoreVertical } from "react-icons/fi";
-import IconButton from "@mui/material/IconButton";
 import { deleteProductFavorite } from "./../../features/favoriteSlice";
 import { Link } from "react-router-dom";
 
@@ -15,32 +14,25 @@ const Products = ({ name, price, img, left, id, basket }) => {
   const dispatch = useDispatch();
   const { setModalActive } = useContext(Context);
 
+  let loader = useSelector((state) => state.cart.loader);
   const token = useSelector((state) => state.user.token);
   const favorite = useSelector((state) => state.favorite.favorite.products);
 
-  const cart = basket?.find((item) => {
-    if (item.productId._id === id) {
-      return item;
-    }
-    return false;
-  });
+  const cart = basket?.find((item) => item.productId._id === id);
+  const favor = favorite?.find((item) => item._id === id);
 
-  const favor = favorite?.find((item) => {
-    if (item._id === id) {
-      return item;
-    }
-    return false;
-  });
+  const [loading, setLoading] = useState(loader);
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [dispatch])
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchFavorite())
-  }, [dispatch])
+    dispatch(fetchFavorite());
+  }, [dispatch]);
 
   const handleClick = (id) => {
+    setLoading(id);
     dispatch(addProduct(id));
   };
 
@@ -53,15 +45,12 @@ const Products = ({ name, price, img, left, id, basket }) => {
   };
 
   return (
-    <div className={product.card}>
-      <div className={product.image}>
-        <Link to={`/details/${id}`}>
-          <IconButton title="Подробнее" className={product.details}>
-            <FiMoreVertical />
-          </IconButton>
-        </Link>
-        <img src={img} alt="" />
-      </div>
+    <div className={product.card} key={id}>
+      <Link to={`/details/${id}`}>
+        <div className={product.image}>
+          <img src={img} alt="" />
+        </div>
+      </Link>
       <div className={product.name}>
         <h4>{name}</h4>
         {token ? (
@@ -106,7 +95,16 @@ const Products = ({ name, price, img, left, id, basket }) => {
                 className={product.inBasket}
                 onClick={() => handleClick(id)}
               >
-                В корзину
+                {loading ? (
+                  <Loader
+                    key={id}
+                    type="spinner-cub"
+                    bgColor={"#fff"}
+                    size={30}
+                  />
+                ) : (
+                  <span>В корзину</span>
+                )}
               </Button>
             )
           ) : (

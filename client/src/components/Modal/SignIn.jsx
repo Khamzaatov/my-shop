@@ -77,7 +77,7 @@ const SignIn = () => {
                   )}
                 </p>
               </div>
-              {error && <div className="err" style={{top: '206px'}}>Неверный логин или пароль!</div>}
+              {error && <div className="err" style={{top: '168px'}}>Неверный логин или пароль!</div>}
               <button>Войти</button>
               <p className='link'>
                 Ещё нет аккаунта?{" "}

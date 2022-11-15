@@ -13,6 +13,8 @@ const Profile = () => {
         dispatch(fetchUser())
     }, [dispatch])
 
+    console.log(user);
+
     return (
         <div className={style.container}>
             <div className={style.profile}>
@@ -20,7 +22,7 @@ const Profile = () => {
                     <div className={style.avatar}>
                         <img src={avatar} alt="" />
                     </div>
-                    <div className={style.username}>{user.email}</div>
+                    <div className={style.username}>{user.username}</div>
                 </div> 
             </div>
         </div>

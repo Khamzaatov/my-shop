@@ -4,12 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import {
-  decProductCart,
-  deleteProduct,
-  fetchCart,
-  incProductCart,
-} from "./../../features/cartSlice";
+import { decProductCart, deleteProduct, fetchCart, incProductCart } from "./../../features/cartSlice";
 import { useEffect } from "react";
 
 const CartItem = ({ name, img, price, amount, id }) => {
@@ -33,7 +28,7 @@ const CartItem = ({ name, img, price, amount, id }) => {
 
   return (
     <>
-      <div className={cart.product}>
+      <div className={cart.product} key={id}>
         <div className={cart.image}>
           <img src={img} alt="" />
         </div>

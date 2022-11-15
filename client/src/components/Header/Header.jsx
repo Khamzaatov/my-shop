@@ -12,6 +12,7 @@ import { Link } from "react-scroll";
 import avatar from '../../assets/images/logo.png'
 import { fetchCart } from './../../features/cartSlice';
 import '../../style.sass'
+import { fetchFavorite } from "../../features/favoriteSlice";
 
 const Header = () => {
   const [position, setPosition] = useState(window.pageYOffset)
@@ -24,7 +25,11 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(fetchCart())
-  }, [dispatch])
+  })
+
+  useEffect(() => {
+    dispatch(fetchFavorite())
+  })
   
   const cls = visible ? "visible" : "hidden";
 
@@ -56,9 +61,7 @@ const Header = () => {
           <li>
             <Link
               to="carusel"
-              spy={true}
-              smooth={true}
-              offset={-80}
+              offset={0}
               duration={500}
             >
               <NavLink to="/">Главная</NavLink>
@@ -70,9 +73,7 @@ const Header = () => {
           <li>
             <Link
               to="about"
-              spy={true}
-              smooth={true}
-              offset={-80}
+              offset={0}
               duration={500}
             >
               <NavLink to="/about">О нас</NavLink>

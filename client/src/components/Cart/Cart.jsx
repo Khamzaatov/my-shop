@@ -14,6 +14,7 @@ const Cart = () => {
 
   const loader = useSelector((state) => state.cart.loader);
   const token = useSelector((state) => state.user.token);
+  const basket = useSelector((state) => state.cart.cart.products);
 
   const { setModalActive } = useContext(Context);
 
@@ -21,16 +22,14 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const basket = useSelector((state) => state.cart.cart.products);
 
   return (
     <div className={cart.container}>
       <BlockCart />
-
       {token ? (
         loader ? (
           <div className={cart.loader}>
-            <Loader type="spinner-cub" bgColor={"#000"} size={90} />
+            <Loader bgColor={"#000"} size={90} />
           </div>
         ) : basket?.length > 0 ? (
           basket?.map((el) => {

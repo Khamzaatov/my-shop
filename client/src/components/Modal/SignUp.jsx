@@ -106,7 +106,7 @@ const SignUp = () => {
                 stlye={{position : 'relative'}}
               />
               <label>Повторите пароль</label>
-              {(submit && password !== password2) && <div className="error">Пароли не совпадают</div>}
+              {(submit && password !== password2) && <div className="error">Пароли не совпадают!</div>}
               {passwordSwown2 ? (
                 <AiFillEye
                   className="eye"
@@ -122,7 +122,7 @@ const SignUp = () => {
           </div>
           <p>
           <MaskedInput
-            mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            mask={['+', /\d/, ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
             placeholder=" "
             guide={false}
             value={phone}

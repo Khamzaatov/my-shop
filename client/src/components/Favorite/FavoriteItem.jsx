@@ -1,28 +1,29 @@
 import favorite from "./favorite.module.sass";
 import IconButton from "@mui/material/IconButton";
+import Loader from "react-js-loader";
+import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductFavorite } from "./../../features/favoriteSlice";
 import { VscChromeClose } from "react-icons/vsc";
-import Button from "@mui/material/Button";
 import { addProduct } from "../../features/cartSlice";
+import { useState } from "react";
 
 const FavoriteItem = ({ name, id, price, left, img }) => {
   const dispatch = useDispatch();
 
+  let loader = useSelector((state) => state.cart.loader);
   const basket = useSelector((state) => state.cart.cart.products);
 
-  const cart = basket?.find((item) => {
-    if (item.productId._id === id) {
-      return item;
-    }
-    return false;
-  });
+  const [loading, setLoading] = useState(loader);
+
+  const cart = basket?.find((item) => item.productId._id === id);
 
   const removeItem = (id) => {
     dispatch(deleteProductFavorite(id));
   };
 
   const handleClick = (id) => {
+    setLoading(id);
     dispatch(addProduct(id));
   };
 
@@ -56,7 +57,18 @@ const FavoriteItem = ({ name, id, price, left, img }) => {
               </Button>
             ) : (
               <Button onClick={() => handleClick(id)} variant="outlined">
-                В корзину
+                {loading ? (
+                  <div className={favorite.loading}>
+                    <Loader
+                      key={id}
+                      type="spinner-cub"
+                      bgColor={"red"}
+                      size={30}
+                    />
+                  </div>
+                ) : (
+                  <span>В корзину</span>
+                )}
               </Button>
             )
           ) : (
