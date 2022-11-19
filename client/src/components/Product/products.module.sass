@@ -2,6 +2,9 @@
     width: 100%
     display: flex
     justify-content: center
+    flex-direction: column
+    h1
+        font-weight: 600
     .product
         width : 100%
         display: flex
@@ -10,10 +13,12 @@
             width: 330px
             height: 523px
             margin: 20px 40px 20px 0
+            border: 1px solid #f3f3f3
+            transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out
             &:hover
                 border: 0
-                transition: 200ms
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)
+                box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.06)
+                transform: translateY(-5px)
             .name
                 display: flex
                 justify-content: space-between
@@ -50,7 +55,7 @@
                     font-size: 19px
                     height: 45px                        
             .image
-                width: 330px
+                width: 329.8px
                 height: 375px
                 img
                     height: 100%

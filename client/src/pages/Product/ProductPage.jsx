@@ -12,7 +12,7 @@ import { BsHeart } from "react-icons/bs";
 import { IoCart, IoChevronBackSharp } from "react-icons/io5";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { Context } from "./../../context/context";
-import { fetchCart, addProduct } from "../../features/cartSlice";
+import { addProduct } from "../../features/cartSlice";
 import { useSound } from "use-sound";
 import sound from "../../assets/sound/song.mp3";
 
@@ -28,10 +28,6 @@ const ProductPage = () => {
   const loader = useSelector((state) => state.cart.loader);
   const products = useSelector((state) => state.product.products);
   const product = products.find((item) => item._id === id);
-
-  useEffect(() => {
-    dispatch(fetchCart());
-  });
 
   useEffect(() => {
     dispatch(fetchProducts("Все"));

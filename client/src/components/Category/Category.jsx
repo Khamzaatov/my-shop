@@ -1,4 +1,5 @@
 import cat from "./category.module.sass";
+import { RiCloseLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./../../features/productSlice";
 import { useContext } from "react";
@@ -13,59 +14,58 @@ const Category = () => {
     dispatch(fetchProducts(category));
   };
 
-  const handleChangeMin = (e) => {
-    setMin(e.target.value);
-  };
-
-  const handleChangeMax = (e) => {
-    setMax(e.target.value);
-  };
-
-  const handleChangeSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
   return (
     <div className={cat.container}>
-      <div className={cat.row}>
-        <div className={cat.search}>
-          <div className={cat.title}>Поиск</div>
-          <input
-            type="text"
-            value={search}
-            onChange={handleChangeSearch}
-            placeholder="Я ищу..."
-          />
-        </div>
-        <div className={cat.category}>
-          <div className={cat.title}>Категории</div>
-          <div className={cat.list}>
-            <button onClick={() => getCategory("Все")}>Все</button>
-            <button onClick={() => getCategory("Мужские")}>Мужские</button>
-            <button onClick={() => getCategory("Женские")}>Женские</button>
-            <button onClick={() => getCategory("Детские")}>Детские</button>
+      <div className={cat.filter}>
+        <div className={cat.row}>
+          <div className={cat.search}>
+            <div className={cat.title}>Поиск</div>
+            <div className={cat.search__close}>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Я ищу..."
+              />
+              {search && (
+                <RiCloseLine
+                  onClick={() => setSearch("")}
+                  className={cat.close__icon}
+                />
+              )}
+            </div>
           </div>
-        </div>
-        <div className={cat.price}>
-          <div className={cat.title}>Цена, ₽</div>
-          <div className={cat.inp}>
-            <input
-              className={cat.one}
-              value={min}
-              onChange={handleChangeMin}
-              type="text"
-              placeholder="От"
-            />
-            <input
-              className={cat.second}
-              value={max}
-              onChange={handleChangeMax}
-              type="text"
-              placeholder="До"
-            />
+          <div className={cat.category}>
+            <div className={cat.title}>Категории</div>
+            <div className={cat.list}>
+              <button onClick={() => getCategory("Все")}>Все</button>
+              <button onClick={() => getCategory("Мужские")}>Мужские</button>
+              <button onClick={() => getCategory("Женские")}>Женские</button>
+              <button onClick={() => getCategory("Детские")}>Детские</button>
+            </div>
+          </div>
+          <div className={cat.price}>
+            <div className={cat.title}>Цена, ₽</div>
+            <div className={cat.inp}>
+              <input
+                className={cat.one}
+                value={min}
+                onChange={(e) => setMin(e.target.value)}
+                type="text"
+                placeholder="От"
+              />
+              <input
+                className={cat.second}
+                value={max}
+                onChange={(e) => setMax(e.target.value)}
+                type="text"
+                placeholder="До"
+              />
+            </div>
           </div>
         </div>
       </div>
+      <div className={cat.line}></div>
     </div>
   );
 };

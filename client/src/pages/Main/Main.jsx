@@ -8,7 +8,9 @@ import Map from './../../components/Map/Map';
 import Footer from './../../components/Footer/Footer';
 import Info from "../../components/Info/Info";
 
+
 const Main = () => {  
+  
   return (
     <>
       <CarouselBox />
@@ -20,7 +22,7 @@ const Main = () => {
             <Category />
           </div>
           <div className={main.products}>
-            <Product />
+            <Product /> 
           </div>
         </div>
         <BlockMap />

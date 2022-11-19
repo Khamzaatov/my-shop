@@ -1,39 +1,59 @@
 .container
-    margin-top: 20px
-    width: 360px
+    display: flex   
     position: sticky
+    top: 1.3rem
+    
+
+.filter
+    width: 360px
     height: 90vh
     background-color: #fff
-    top: 3.4rem
+    margin-top: 25px
     .search
+        &__close
+            position: relative
+            display: flex
+            color: gray
+            font-size: 22px
+            .close__icon
+                color: #ccc
+                position: absolute
+                top: 14px
+                left: 290px
+                cursor: pointer
+
         .title
             margin: 12px 0 0 143px
         input
             border: 1px solid #d5d5d5
             width: 300px
             height: 30px
+            font-size: 16px
             border-radius: 10px    
             padding-left: 10px  
+            position: absolute
             margin: 10px 0 20px 20px
             outline: none
-    .list
-        display: flex
-        flex-direction: column
-        margin-top: 10px
-        button
-            border: none
-            height: 37px
-            font-size: 17px
-            font-weight: 600
-            border-radius: 5px
-            margin-bottom: 10px
-            border: 1px solid #d5d5d5
-            background-color: #fff
-            margin-left: 50px
-            margin-right: 50px
-            &:hover, &:focus
-                background-color: black
-                color: #fff
+    .category
+        margin-top: 60px
+        .list
+            display: flex
+            flex-direction: column
+            margin-top: 20px
+            button
+                border: none
+                height: 37px
+                font-size: 17px
+                font-weight: 600
+                border-radius: 5px
+                margin-bottom: 10px
+                border: 1px solid #d5d5d5
+                background-color: #fff
+                margin-left: 50px
+                margin-right: 50px
+                &:hover, &:focus
+                    background-color: black
+                    color: #fff
     .title
         font-size: 24px
         font-weight: 700
@@ -64,4 +84,10 @@
         margin-left: 130px
     input
         width: 200px
-        margin-top: 8px
+        margin-top: 10px
+
+.line
+    width: 3px
+    background-color: #d5d5d5
+    margin-right: 20px
+    opacity: 0.8

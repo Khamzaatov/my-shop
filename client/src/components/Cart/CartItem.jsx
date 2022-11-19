@@ -11,8 +11,8 @@ const CartItem = ({ name, img, price, amount, id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
+    dispatch(fetchCart())
+  }, [dispatch])
 
   const removeItem = (id) => {
     dispatch(deleteProduct(id));

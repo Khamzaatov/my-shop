@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
 import Products from "./Products";
 import product from "./products.module.sass";
+import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "./../../features/productSlice";
 import { Context } from './../../context/context';
-
+import Paginations from './../Pagination/Pagination';
 
 const Product = () => {
-  const { min, max, search } = useContext(Context)
+  const { min, max, search, currentPage, countriesPerPage } = useContext(Context)
 
   const dispatch = useDispatch();
   const products = useSelector((state) => !min && !max ? state.product.products.map(item => item) : state.product.products.filter((el) => el.price >= min && el.price <= max));
@@ -19,28 +19,38 @@ const Product = () => {
   }, [dispatch]);
 
   const filteredSneakears = products.filter((item) => {
-     return item.name.toLowerCase().includes(search.toLowerCase())
+    return item.name.toLowerCase().includes(search.toLowerCase())
   })
 
+  const lastCountryIndex = currentPage * countriesPerPage
+  const firstCountryIndex = lastCountryIndex - countriesPerPage
+  const currentCountry = filteredSneakears.slice(firstCountryIndex, lastCountryIndex)
+  
+  console.log(currentCountry)
+
   return (
-    <div className={product.container}>
-      <div className={product.product} id='product'>
-        {filteredSneakears?.map((product) => {
-          return (
-            <Products
-              key={product._id}
-              id={product._id}
-              name={product.name}
-              price={product.price}
-              left={product.left}
-              category={product.category}
-              img={product.img}
-              basket={basket}
-            />
-          );
-        })}
+    <>
+      <div className={product.container}>
+        {(search && currentCountry < 1) ? <h1>По вашему запросу ничего не найдено!</h1> : (search) ? <h1>Поиск по запросу: "{search}"</h1> : null}
+        <div className={product.product} id='product'>
+          {currentCountry.map((product) => {
+            return (
+              <Products
+                key={product._id}
+                id={product._id}
+                name={product.name}
+                price={product.price}
+                left={product.left}
+                category={product.category}
+                img={product.img}
+                basket={basket}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+      {!(currentCountry < 1) && <Paginations />}
+    </>
   );
 };
 

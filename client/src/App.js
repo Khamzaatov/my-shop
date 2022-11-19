@@ -1,9 +1,8 @@
-import './style.sass'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Context } from './context/context';
 import { useState } from 'react';
 import Main from './pages/Main/Main';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import About from './pages/About/About';
 import CartPage from './pages/Cart/CartPage';
 import SignIn from './components/Modal/SignIn';
@@ -14,6 +13,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Loyout from './Loyout/Loyout';
 import ProductPage from './pages/Product/ProductPage';
 import Profile from './pages/Profile/Profile';
+import './style.sass'
 
 
 function App() {
@@ -25,8 +25,22 @@ function App() {
   const [max, setMax] = useState("")
   const [search, setSearch] = useState("")
   const [block, setBlock] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [countriesPerPage] = useState(9)
 
-  const value = { modalActive, registr, min, max, search, block, setModalActive, setRegistr, setMin, setMax, setSearch, setBlock }
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  const previous = () => {
+    if(currentPage !== 1) {
+      setCurrentPage(prev => prev - 1)
+    }
+  }
+  const nextPage = () => {
+    if (currentPage !== 4) {
+      setCurrentPage(prev => prev + 1)
+    }
+  }
+  
+  const value = { modalActive, registr, min, max, search, block, currentPage, countriesPerPage, setCurrentPage, nextPage, previous, setModalActive, setRegistr, setMin, setMax, setSearch, setBlock, paginate }
 
   if (!token) {
     return (

@@ -1,4 +1,6 @@
 import header from "./header.module.sass";
+import avatar from "../../assets/images/logo.png";
+import "../../style.sass";
 import { IoCart } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 import { SiNike } from "react-icons/si";
@@ -9,14 +11,12 @@ import { BsHeartFill } from "react-icons/bs";
 import { signOut } from "../../features/userSlice";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import avatar from '../../assets/images/logo.png'
-import { fetchCart } from './../../features/cartSlice';
-import '../../style.sass'
+import { fetchCart } from "./../../features/cartSlice";
 import { fetchFavorite } from "../../features/favoriteSlice";
 
 const Header = () => {
-  const [position, setPosition] = useState(window.pageYOffset)
-  const [visible, setVisible] = useState(true)
+  const [position, setPosition] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
 
   const dispatch = useDispatch();
   const { setModalActive, block, setBlock } = useContext(Context);
@@ -24,28 +24,28 @@ const Header = () => {
   const amount = useSelector((state) => state.cart.cart.products?.length);
 
   useEffect(() => {
-    dispatch(fetchCart())
-  })
+    dispatch(fetchCart());
+  });
 
   useEffect(() => {
-    dispatch(fetchFavorite())
-  })
-  
+    dispatch(fetchFavorite());
+  });
+
   const cls = visible ? "visible" : "hidden";
 
-  useEffect(()=> {
+  useEffect(() => {
     const handleScroll = () => {
-       let moving = window.pageYOffset
-       
-       setVisible(position > moving);
-       setPosition(moving)
-       setBlock(false)
+      let moving = window.pageYOffset;
+
+      setVisible(position > moving);
+      setPosition(moving);
+      setBlock(false);
     };
     window.addEventListener("scroll", handleScroll);
-    return(() => {
-       window.removeEventListener("scroll", handleScroll);
-    })
-})
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
 
   const exit = () => {
     dispatch(signOut());
@@ -59,11 +59,7 @@ const Header = () => {
       <div className={header.link}>
         <ul className={header.ul}>
           <li>
-            <Link
-              to="carusel"
-              offset={0}
-              duration={500}
-            >
+            <Link to="carusel" offset={0} duration={500}>
               <NavLink to="/">Главная</NavLink>
             </Link>
           </li>
@@ -71,11 +67,7 @@ const Header = () => {
             <NavLink to="/news">Новинки</NavLink>
           </li>
           <li>
-            <Link
-              to="about"
-              offset={0}
-              duration={500}
-            >
+            <Link to="about" offset={0} duration={500}>
               <NavLink to="/about">О нас</NavLink>
             </Link>
           </li>
@@ -112,10 +104,7 @@ const Header = () => {
         ) : (
           <div className={header.cart}>
             <NavLink to="/cart">
-              <IoCart
-                className={header.cart_icon}
-                title="Корзина"
-              />
+              <IoCart className={header.cart_icon} title="Корзина" />
             </NavLink>
           </div>
         )}
@@ -128,13 +117,17 @@ const Header = () => {
             />
           ) : (
             <div className={header.user__avatar}>
-                <img src={avatar} alt="" />
+              <img src={avatar} alt="" title="Профиль" />
             </div>
           )}
-          {(token && block) && <div className={header.user__block}>
-            <NavLink to='/profile'><li>Профиль</li></NavLink>
-            <li onClick={exit}>Выход</li>
-          </div>}
+          {token && block && (
+            <div className={header.user__block}>
+              <NavLink to="/profile">
+                <li>Профиль</li>
+              </NavLink>
+              <li onClick={exit}>Выход</li>
+            </div>
+          )}
         </div>
       </div>
     </header>
