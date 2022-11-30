@@ -14,6 +14,7 @@ import Loyout from './Loyout/Loyout';
 import ProductPage from './pages/Product/ProductPage';
 import Profile from './pages/Profile/Profile';
 import './style.sass'
+import Formalization from './pages/Formalization/Formalization';
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
                 <Route path='/contacts' element={<Contact />}></Route>
                 <Route path='/details/:id' element={<ProductPage/>}></Route>
                 <Route path='/profile' element={<Profile />}></Route>
+                <Route path='/formalization' element={<Formalization />}></Route>
               </Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>

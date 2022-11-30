@@ -2,16 +2,22 @@ import cat from "./category.module.sass";
 import { RiCloseLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./../../features/productSlice";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Context } from "./../../context/context";
 
 const Category = () => {
+  const inputRef = useRef();
   const { min, max, setMin, setMax, search, setSearch } = useContext(Context);
 
   const dispatch = useDispatch();
 
   const getCategory = (category) => {
     dispatch(fetchProducts(category));
+  };
+
+  const handleClear = () => {
+    setSearch("");
+    inputRef.current.focus();
   };
 
   return (
@@ -22,6 +28,7 @@ const Category = () => {
             <div className={cat.title}>Поиск</div>
             <div className={cat.search__close}>
               <input
+                ref={inputRef}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -29,7 +36,7 @@ const Category = () => {
               />
               {search && (
                 <RiCloseLine
-                  onClick={() => setSearch("")}
+                  onClick={handleClear}
                   className={cat.close__icon}
                 />
               )}
@@ -51,14 +58,14 @@ const Category = () => {
                 className={cat.one}
                 value={min}
                 onChange={(e) => setMin(e.target.value)}
-                type="text"
+                type="number"
                 placeholder="От"
               />
               <input
                 className={cat.second}
                 value={max}
                 onChange={(e) => setMax(e.target.value)}
-                type="text"
+                type="number"
                 placeholder="До"
               />
             </div>

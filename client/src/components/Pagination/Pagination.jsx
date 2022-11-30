@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Context } from "../../context/context";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
 import style from "./paginate.module.sass";
 
 const Paginations = () => {
-
-  const { countriesPerPage, paginate, nextPage, previous } = useContext(Context);
+  const { countriesPerPage, paginate, nextPage, previous } =
+    useContext(Context);
 
   const totalCountries = useSelector((state) => state.product.products.length);
 
@@ -19,16 +20,26 @@ const Paginations = () => {
   return (
     <div className={style.center}>
       <div className={style.pagination}>
-        <Link onClick={previous}>
-          &laquo;
+        <Link to="block" offset={0} duration={500}>
+          <NavLink className={style.link} onClick={previous}>
+            &laquo;
+          </NavLink>
         </Link>
         {pageNumbers.map((number) => (
-          <Link onClick={() => paginate(number)} key={number}>
-            {number}
+          <Link to="block" offset={100} duration={500}>
+            <NavLink
+              className={style.link}
+              onClick={() => paginate(number)}
+              key={number}
+            >
+              {number}
+            </NavLink>
           </Link>
         ))}
-        <Link onClick={nextPage}>
-          &raquo;
+        <Link to="block" offset={0} duration={500}>
+          <NavLink className={style.link} onClick={nextPage}>
+            &raquo;
+          </NavLink>
         </Link>
       </div>
     </div>

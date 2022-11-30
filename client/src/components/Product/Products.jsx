@@ -48,6 +48,7 @@ const Products = ({ name, price, img, left, id, basket }) => {
     <div className={product.card} key={id}>
       <Link to={`/details/${id}`}>
         <div className={product.image}>
+          <div className={product.details}>Быстрый просмотр</div>
           <img src={img} alt="" />
         </div>
       </Link>

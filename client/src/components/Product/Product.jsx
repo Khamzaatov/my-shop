@@ -26,12 +26,10 @@ const Product = () => {
   const firstCountryIndex = lastCountryIndex - countriesPerPage
   const currentCountry = filteredSneakears.slice(firstCountryIndex, lastCountryIndex)
   
-  console.log(currentCountry)
-
   return (
     <>
       <div className={product.container}>
-        {(search && currentCountry < 1) ? <h1>По вашему запросу ничего не найдено!</h1> : (search) ? <h1>Поиск по запросу: "{search}"</h1> : null}
+        {((search || (min && max)) && currentCountry < 1) ? <h1>По вашему запросу ничего не найдено!</h1> : (search) ? <h1>Поиск по запросу: "{search}"</h1> : null}
         <div className={product.product} id='product'>
           {currentCountry.map((product) => {
             return (

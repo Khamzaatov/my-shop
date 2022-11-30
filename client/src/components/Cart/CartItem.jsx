@@ -6,12 +6,17 @@ import { AiFillMinusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { decProductCart, deleteProduct, fetchCart, incProductCart } from "./../../features/cartSlice";
 import { useEffect } from "react";
+import { fetchProducts } from './../../features/productSlice';
 
 const CartItem = ({ name, img, price, amount, id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCart())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(fetchProducts('Все'))
   }, [dispatch])
 
   const removeItem = (id) => {
@@ -51,8 +56,8 @@ const CartItem = ({ name, img, price, amount, id }) => {
         </div>
         <div className={cart.total}>{amount * price}</div>
         <div className={cart.remove}>
-          <IconButton className={cart.remove__icon} aria-label="delete">
-            <DeleteIcon onClick={() => removeItem(id)} />
+          <IconButton onClick={() => removeItem(id)} className={cart.remove__icon} aria-label="delete">
+            <DeleteIcon />
           </IconButton>
         </div>
       </div>

@@ -102,8 +102,8 @@ const cartSlice = createSlice({
         .addCase(addProduct.pending, (state, action) => {
             state.loader = true
         })
-        .addCase(deleteProduct.fulfilled, (state, action) => {
-            state.cart = action.payload
+        .addCase(deleteProduct.fulfilled, (state) => {
+            state.cart.products = state.cart.products.filter((item, index) => item.productId._id !== index)
             state.loader = false
         })
         .addCase(deleteProduct.pending, (state, action) => {
@@ -115,10 +115,20 @@ const cartSlice = createSlice({
             state.error = action.payload
         })
         .addCase(incProductCart.fulfilled, (state, action) => {
-            state.cart = action.payload
+            state.cart.products = state.cart.products.map((item) => {
+                if(item.productId === action.payload) {
+                    item.amount++;
+                }
+                return item;
+            })
         })
         .addCase(decProductCart.fulfilled, (state, action) => {
-            state.cart = action.payload
+            state.cart.products = state.cart.products.map((item) => {
+                if(item.productId === action.payload) {
+                    item.amount--;
+                }
+                return item;
+            })
         })
     } 
 })
